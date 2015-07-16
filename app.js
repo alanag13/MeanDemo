@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 1337;
 
 //configure some server information: views and caching
 app.set('views', __dirname + '/client/views');
