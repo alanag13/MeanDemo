@@ -10,17 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/alanag13/MeanDemo.git"
   },
-  "keywords": [
-    "mean",
-    "mongo",
-    "mongoDB",
-    "express",
-    "express.js",
-    "angular",
-    "angular.js",
-    "node",
-    "node.js"
-  ],
   "author": "Alan Grgic",
   "license": "MIT",
   "bugs": {
