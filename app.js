@@ -13,7 +13,7 @@ app.get('*', function(req, res){
 	res.render('index');
 });
 
-//start the server and listen on port 80
+//start the server and listen on the assigned port
 http.listen(port, function () {
     console.log('Listening on port ' + port);
 });
