@@ -2,6 +2,12 @@ doctype
 html
 	head
 		include ../includes/head
-	body
+	body(ng-app="MeanDemo")
 		.container
 			block content
+			.main(ui-view)
+		script(src="/scripts/libs/angular.min.js")
+		script(src="/scripts/libs/angular-ui-router.min.js")
+		script(src="/scripts/libs/angular-resource.min.js")
+		script(src="/scripts/mean-demo.js")
+		script(src="/scripts/MeanDemo/Controllers/TestController.js")
