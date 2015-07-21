@@ -1,10 +1,10 @@
 nav.navbar.navbar-default
   .container-fluid
     .navbar-header
-      a.navbar-brand(ui-sref='testState') MeanDemo
+      a.navbar-brand(ui-sref="main({pageName: 'home'})") MeanDemo
     div
       ul.nav.navbar-nav
         li
-          a(ui-sref='stuff') Stuff
+          a(ui-sref="main({pageName: 'stuff'})") Stuff
         li
-          a(ui-sref='top') Top Articles
+          a(ui-sref="main({pageName: 'articles'})") Top Articles

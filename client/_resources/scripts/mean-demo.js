@@ -5,28 +5,15 @@ var MeanDemo = MeanDemo || (function(){
 	app.config(function ($stateProvider, $urlRouterProvider){
 				
 		$stateProvider
-			.state("testState", {
-				url: "/test",
+			.state("main", {
+				url: "/:pageName",
 				templateUrl: "/partials/main",
 				controller: "MainController",
 				resolve: {
-					headline:  function(){ return "I injected this headline as a dependency!";}
-				}
-			})
-			.state("stuff", {
-				url: "/stuff",
-				templateUrl: "/partials/main",
-				controller: "MainController",
-				resolve: {
-					headline:  function(){ return "This is a different headline for the stuff page"; }
-				}
-			})
-			.state("top", {
-				url: "/top",
-				templateUrl: "/partials/main",
-				controller: "MainController",
-				resolve: {
-					headline:  function(){ return "Check out our top articles!"; }
+					headline: ['$stateParams', 'HeadlineService', function($stateParams, headlineService){
+						var title = $stateParams.pageName;
+						return headlineService.getHeadline(title);
+					}]  
 				}
 			});
 	});
