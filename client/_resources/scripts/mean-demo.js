@@ -5,6 +5,16 @@ var MeanDemo = MeanDemo || (function(){
 	app.config(function ($stateProvider, $urlRouterProvider){
 				
 		$stateProvider
+			.state("analytics", {
+			  url: "/dashboard",
+			  templateUrl: "/partials/dashboard",
+			  controller: "DashboardController",
+			  resolve: {
+				  pageViewList: ['AnalyticsService', function(analyticsService){
+					  return analyticsService.getPageViewCounts;
+				  }]
+			  }
+		  })
 			.state("main", {
 				url: "/:pageName",
 				templateUrl: "/partials/main",
@@ -20,6 +30,7 @@ var MeanDemo = MeanDemo || (function(){
 					}]  
 				}
 			});
+
 	});
 	
 	return app;

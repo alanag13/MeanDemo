@@ -1,0 +1,5 @@
+.row
+	.col-xs-6
+		ul.list-group
+			li.list-group-item(ng-repeat="page in pageViewList | orderBy: '-count'")
+				| {{page._id}} -- {{page.count}}
