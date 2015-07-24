@@ -13,8 +13,20 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/_resources', { maxAge: 2592000000 }));
 
+//get the appropriate angular partials file when it is requested
 app.get('/partials/:path', function(req, res){
 	res.render('partials/' + req.params.path);
+});
+
+//route api requests to their appropriate module
+app.get('/api/:object/get:query', function(req, res){
+	res.write('getStuff');
+	res.end();
+});
+
+app.post('/api/:object/post:query', function(req, res){
+	res.write('postStuff');
+	res.end();
 });
 
 //route all other requests to the index page

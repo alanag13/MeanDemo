@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/alanag13/MeanDemo#readme",
   "dependencies": {
+    "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "jade": "^1.11.0",
     "socket.io": "^1.3.6"
