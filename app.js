@@ -32,7 +32,7 @@ app.get('/api/pageload/getCounts', function(req, res){
 
 app.post('/api/pageload/add', function(req, res){
 	mongoExecute(function (err, db){
-		pageEvents.PageLoad(db, res).postPageLoad("test", new Date());
+		pageEvents.PageLoad(db, res).postPageLoad(req.body.title, new Date());
 	});
 });
 

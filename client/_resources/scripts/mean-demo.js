@@ -13,6 +13,10 @@ var MeanDemo = MeanDemo || (function(){
 					headline: ['$stateParams', 'HeadlineService', function($stateParams, headlineService){
 						var title = $stateParams.pageName;
 						return headlineService.getHeadline(title);
+					}],
+				pageName: ['$stateParams', 'HeadlineService', function($stateParams, headlineService){
+						var title = $stateParams.pageName;
+						return title;
 					}]  
 				}
 			});
