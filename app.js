@@ -3,6 +3,11 @@ var app = express();
 var http = require('http').Server(app);
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 1337;
+var conn = require('./mongoConnection.json');
+var MeanDemoLib = require('./MeanDemoLib')(conn);
+var pageEvents = MeanDemoLib.PageEvents;
+var mongodb = require('mongodb').MongoClient;
+
 
 //configure some server information: views and caching
 app.set('views', __dirname + '/client/views');
@@ -19,14 +24,16 @@ app.get('/partials/:path', function(req, res){
 });
 
 //route api requests to their appropriate module
-app.get('/api/:object/get:query', function(req, res){
-	res.write('getStuff');
-	res.end();
+app.get('/api/pageload/getCounts', function(req, res){
+	mongoExecute(function (err, db){
+		pageEvents.PageLoad(db, res).getPageLoadCounts();
+	});
 });
 
-app.post('/api/:object/post:query', function(req, res){
-	res.write('postStuff');
-	res.end();
+app.post('/api/pageload/add', function(req, res){
+	mongoExecute(function (err, db){
+		pageEvents.PageLoad(db, res).postPageLoad("test", new Date());
+	});
 });
 
 //route all other requests to the index page
@@ -38,3 +45,7 @@ app.get('*', function(req, res){
 http.listen(port, function () {
     console.log('Listening on port ' + port);
 });
+
+var mongoExecute = function(connectCb){
+	mongodb.connect(MeanDemoLib.connUrl,connectCb);
+}

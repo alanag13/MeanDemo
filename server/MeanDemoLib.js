@@ -1,6 +1,0 @@
-var MeanDemoLib = {
-	
-	PageEvents: {
-			PageLoad: ""
-		}
-}
