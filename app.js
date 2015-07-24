@@ -7,6 +7,8 @@ var conn = require('./mongoConnection.json');
 var MeanDemoLib = require('./MeanDemoLib')(conn);
 var pageEvents = MeanDemoLib.PageEvents;
 var mongodb = require('mongodb').MongoClient;
+var io = require('socket.io')(http);
+var currentUsers = 0;
 
 
 //configure some server information: views and caching
@@ -46,6 +48,22 @@ http.listen(port, function () {
     console.log('Listening on port ' + port);
 });
 
+io.on('connection', function (socket) {
+    //subscribe user to connection events for live updates
+		socket.on('viewing-site', function(){
+			currentUsers++;
+			io.emit('num-users-changed', currentUsers);
+		});
+		io.emit('num-users-changed', currentUsers);
+		
+		socket.on('disconnect', function(){
+			currentUsers--;
+			io.emit('num-users-changed', currentUsers);
+		});
+    
+});
+
+//////////////////////////////////////////////////////////////////////////
 var mongoExecute = function(connectCb){
 	mongodb.connect(MeanDemoLib.connUrl,connectCb);
 }

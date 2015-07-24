@@ -1,7 +1,13 @@
 var MeanDemo = MeanDemo || (function(){
 	
 	var app = angular.module("MeanDemo", ["ngResource", "ui.router"]);
-	
+	var socket = io.connect();
+	var numUsers = 0;
+	socket.on('num-users-changed', function(newCount){
+			numUsers = newCount;	
+	});
+
+	socket.emit('viewing-site');
 	app.config(function ($stateProvider, $urlRouterProvider){
 				
 		$stateProvider
@@ -12,9 +18,14 @@ var MeanDemo = MeanDemo || (function(){
 			  resolve: {
 				  pageViewList: ['AnalyticsService', function(analyticsService){
 					  return analyticsService.getPageViewCounts;
-				  }]
-			  }
-		  })
+				  }],
+				  socket: function(){
+					  return socket;
+			  },
+			  	  initUserCount: function(){
+						return numUsers;
+					}
+		  }})
 			.state("main", {
 				url: "/:pageName",
 				templateUrl: "/partials/main",
